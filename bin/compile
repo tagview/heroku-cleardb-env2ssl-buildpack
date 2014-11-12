@@ -1,0 +1,28 @@
+#!/bin/sh
+BUILD_DIR=$1
+ENV_DIR=$3
+
+indent() {
+  sed -u 's/^/       /'
+}
+
+copy_from_env() {
+  echo "Copying config var $1 to $2." | indent
+  env_cert_file="$ENV_DIR/$1"
+
+  if [ -f $env_cert_file ]; then
+    cp $env_cert_file $2
+  else
+    echo "Failed. $1 ins't setted."
+    exit 1
+  fi
+}
+
+echo "-----> Copying Certificates"
+
+cd $BUILD_DIR
+copy_from_env CLEARDB_SSL_CA_CERT cleardb-ca-cert.pem
+copy_from_env CLEARDB_SSL_CLI_CERT cleardb-cert.pem
+copy_from_env CLEARDB_SSL_KEY cleardb-key.pem
+
+echo "-----> Success"

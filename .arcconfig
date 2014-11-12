@@ -2,7 +2,7 @@
     "project_id": "publicador-multimidia",
     "conduit_uri": "http://phabricator.tagview.com.br",
     "load": [
-        "libphutil/src",
+        "libphutil/src"
     ],
     "base": "git:merge-base(origin/master)"
 }
