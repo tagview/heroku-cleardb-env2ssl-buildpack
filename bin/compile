@@ -18,7 +18,13 @@ copy_from_env() {
   fi
 }
 
-echo "-----> Copying Certificates"
+echo "-----> Copying Certificate Loader"
+
+mkdir $BUILD_DIR/.profile.d
+cp lib/cleardb-env2ssl.sh $BUILD_DIR/.profile.d/cleardb-env2ssl.sh
+chmod -f +x $BUILD_DIR/.profile.d/cleardb-env2ssl.sh
+
+echo "-----> Copying Temporary Certificates"
 
 cd $BUILD_DIR
 copy_from_env CLEARDB_SSL_CA_CERT cleardb-ca-cert.pem
